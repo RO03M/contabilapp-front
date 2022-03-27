@@ -1,0 +1,29 @@
+.icon {
+    transition: 0.3s !important;
+}
+
+.button {
+    width: 7em;
+}
+
+.expandedIcon {
+    transform: rotate(180deg);
+}
+
+.expandTab {
+    padding: 10px 20px !important;
+    background-color: white !important;
+    transition: .3s;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+}
+
+.expandTab:hover {
+    filter: brightness(90%);
+}
+
+.title {
+    font-size: 1.3em;
+}

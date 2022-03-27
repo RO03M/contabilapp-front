@@ -1,0 +1,7 @@
+.dialogContent {
+    padding-top: 0.5em;
+}
+
+.dialogContent > * {
+    margin: 10px 0;
+}
