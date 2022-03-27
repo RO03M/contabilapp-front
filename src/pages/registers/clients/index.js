@@ -5,6 +5,7 @@ import AddModal from "./addModal";
 import Board from "./board";
 import TableToolbar from "modules/tableToolbar";
 import DeleteModal from "./deleteModal";
+import { Get } from "requests";
 
 const ClientsPage = () => {
     
@@ -15,13 +16,13 @@ const ClientsPage = () => {
     const [itemsToDelete, SetItemsToDelete] = useState([]);
     
     const GetData = async () => {
-        let response = await window.api.UserGet(search);
-        SetClients([...response]);
+        const response = await Get("/users");
+        SetClients([...response?.users]);
         console.log([...response]);
     }
 
     const Delete = async () => {
-        await window.api.UserDelete(itemsToDelete);
+        // await Delete(itemsToDelete);
         GetData();
         SetItemsToDelete([]);
     }

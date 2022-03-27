@@ -10,7 +10,7 @@ function App() {
 
 	const palette = useSelector(store => store.PaletteReducer.palette);
 	const theme = useMemo(() => createTheme(palette), [palette]);
-	console.log(theme);
+	
 	return (
 		<div className="App">
 			<ThemeProvider theme={theme}>

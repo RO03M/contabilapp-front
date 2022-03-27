@@ -2,6 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, St
 import { useState } from "react";
 import { Text2Cep, Text2CpfCnpj, Text2Phone } from "utils/masks";
 import { UFList } from "utils/variables";
+import { Post } from "requests"
 
 import styles from "./index.module.css";
 
@@ -14,6 +15,7 @@ const AddModal = props => {
     } = props;
 
     const [name, SetName] = useState("");
+    const [email, SetEmail] = useState("");
     const [city, SetCity] = useState("");
     const [address, SetAddress] = useState("");
     const [complement, SetComplement] = useState("");
@@ -26,6 +28,7 @@ const AddModal = props => {
     const Submit = async () => {
         const data = {
             name: name,
+            email: email,   
             city: city,
             address: address,
             complement: complement,
@@ -35,8 +38,8 @@ const AddModal = props => {
             phone: phone,
             uf: uf
         };
-
-        await window.api.UserCreate(data);
+        
+        const response = await Post("/users", JSON.stringify(data));
 
         onClose();
         onSubmit();
@@ -45,6 +48,7 @@ const AddModal = props => {
 
     const ResetStates = () => {
         SetName("");
+        SetEmail("");
         SetCity("");
         SetAddress("");
         SetComplement("");
@@ -71,6 +75,12 @@ const AddModal = props => {
                     fullWidth
                     value={name}
                     onChange={e => SetName(e.target.value)}
+                />
+                <TextField
+                    label="E-mail"
+                    fullWidth
+                    value={email}
+                    onChange={e => SetEmail(e.target.value)}
                 />
                 <Stack
                     direction={{ xs: "column", sm: "row" }}

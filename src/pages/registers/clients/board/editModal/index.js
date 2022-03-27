@@ -2,6 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, St
 import { useEffect, useState } from "react";
 import { Text2Cep, Text2CpfCnpj, Text2Phone } from "utils/masks";
 import { UFList } from "utils/variables";
+import { Patch } from "requests";
 
 import styles from "./index.module.css";
 
@@ -38,7 +39,7 @@ const EditModal = props => {
             id: id
         };
 
-        await window.api.UserAlter(data);
+        const response = await Patch("/users", JSON.stringify(data));
         onClose();
         onSubmit();
     }

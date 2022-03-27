@@ -1,8 +1,5 @@
 const { app, BrowserWindow, Menu } = require("electron");
 const path = require("path");
-const { migrate } = require("./migrations");
-// const sqlite3 = require("sqlite3");
-require("./main");
 
 const SetMenuOptions = mainWindow => {
     if (!mainWindow) return;
@@ -40,7 +37,6 @@ const CreateWindow = () => {
 }
 
 app.on("ready", () => {
-    migrate();
     CreateWindow();
 });
 
