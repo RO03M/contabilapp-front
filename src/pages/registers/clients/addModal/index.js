@@ -41,9 +41,9 @@ const AddModal = props => {
         
         const response = await Post("/users", JSON.stringify(data));
 
-        onClose();
-        onSubmit();
-        ResetStates();
+        // onClose();
+        // onSubmit();
+        // ResetStates();
     }
 
     const ResetStates = () => {

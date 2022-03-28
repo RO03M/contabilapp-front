@@ -34,7 +34,8 @@ export const Post = async (path, body) => {
 
 export const Put = async (path, body) => {
     const headers = {
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "Content-type": "application/json"
     }
 
     let response = await fetch(API_URL + path, {
@@ -50,9 +51,10 @@ export const Put = async (path, body) => {
 
 export const Patch = async (path, body) => {
     const headers = {
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "Content-type": "application/json"
     }
-
+    console.log(body)
     let response = await fetch(API_URL + path, {
         method: "PATCH",
         headers: headers,
@@ -66,7 +68,8 @@ export const Patch = async (path, body) => {
 
 export const Delete = async (path, body) => {
     const headers = {
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "Content-type": "application/json"
     }
 
     let response = await fetch(API_URL + path, {

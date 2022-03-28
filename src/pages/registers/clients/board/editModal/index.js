@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, St
 import { useEffect, useState } from "react";
 import { Text2Cep, Text2CpfCnpj, Text2Phone } from "utils/masks";
 import { UFList } from "utils/variables";
-import { Patch } from "requests";
+import { Patch, Get } from "requests";
 
 import styles from "./index.module.css";
 
@@ -10,20 +10,21 @@ const EditModal = props => {
 
     const {
         id,
+        client = {},
         onSubmit = () => {},
         onClose = () => {},
         ...other
     } = props;
 
-    const [name, SetName] = useState("");
-    const [city, SetCity] = useState("");
-    const [address, SetAddress] = useState("");
-    const [complement, SetComplement] = useState("");
-    const [district, SetDistrict] = useState("");
-    const [cep, SetCep] = useState("");
-    const [cpf, SetCpf] = useState("");
-    const [phone, SetPhone] = useState("");
-    const [uf, SetUf] = useState(null);
+    const [name, SetName] = useState(client?.name);
+    const [city, SetCity] = useState(client?.city);
+    const [address, SetAddress] = useState(client?.address);
+    const [complement, SetComplement] = useState(client?.complement);
+    const [district, SetDistrict] = useState(client?.district);
+    const [cep, SetCep] = useState(client?.cep);
+    const [cpf, SetCpf] = useState(client?.cpf);
+    const [phone, SetPhone] = useState(client?.phone);
+    const [uf, SetUf] = useState(client?.uf || null);
 
     const Submit = async () => {
         const data = {
@@ -35,31 +36,31 @@ const EditModal = props => {
             documentNumber: cpf,
             cep: cep,
             phone: phone,
-            uf: uf,
-            id: id
+            uf: uf
         };
-
-        const response = await Patch("/users", JSON.stringify(data));
+        console.log(JSON.stringify(data));
+        const response = await Patch(`/users?id=${id}`, JSON.stringify(data));
         onClose();
         onSubmit();
     }
 
-    const GetData = async () => {
-        let response = await window.api.UserGet("", id);
-        if (response) {
-            SetName(response?.name);
-            SetCity(response?.city);
-            SetAddress(response?.address);
-            SetComplement(response?.complement);
-            SetDistrict(response?.district);
-            SetCep(response?.cep);
-            SetCpf(response?.document_number);
-            SetPhone(response?.phone);
-            SetUf(response?.uf);
-        }
-    }
+    // const GetData = async () => {
+    //     let response = await Get(`/users/${id}`);
+    //     if (response?.success) {
+    //         const { user } = response;
+    //         SetName(user?.name);
+    //         SetCity(user?.city);
+    //         SetAddress(user?.address);
+    //         SetComplement(user?.complement);
+    //         SetDistrict(user?.district);
+    //         SetCep(user?.cep);
+    //         SetCpf(user?.document_number);
+    //         SetPhone(user?.phone);
+    //         SetUf(user?.uf);
+    //     }
+    // }
 
-    useEffect(GetData, []);
+    // useEffect(GetData, []);
 
     return (
         <Dialog

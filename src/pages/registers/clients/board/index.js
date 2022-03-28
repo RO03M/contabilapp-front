@@ -1,5 +1,5 @@
 import { Checkbox, IconButton, TableCell, TableRow } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CreateIcon from '@mui/icons-material/Create';
 import EditModal from "./editModal";
 
@@ -61,6 +61,17 @@ const Board = props => {
                 id={id}
                 onClose={() => SetModal(false)}
                 onSubmit={onDataAlter}
+                client={{
+                    name: name,
+                    city: city,
+                    address: address,
+                    complement: complement,
+                    district: district,
+                    cep: cep,
+                    cpf: documentNumber,
+                    phone: phone,
+                    uf: uf
+                }}
             />
         </>
     );

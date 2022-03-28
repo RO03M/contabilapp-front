@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Box, Fab, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import AddModal from "./addModal";
@@ -17,8 +17,9 @@ const ClientsPage = () => {
     
     const GetData = async () => {
         const response = await Get("/users");
-        SetClients([...response?.users]);
-        console.log([...response]);
+        if (response?.success) {
+            SetClients([...response?.users]);
+        }
     }
 
     const Delete = async () => {
@@ -75,8 +76,8 @@ const ClientsPage = () => {
                     <TableBody>
                         {clients.map((client, clientKey) => (
                             <Board
-                                key={client?.id}
-                                id={client?.id}
+                                key={clientKey}
+                                id={client?._id}
                                 name={client?.name}
                                 city={client?.city}
                                 address={client?.address}
