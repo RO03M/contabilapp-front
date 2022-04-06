@@ -7,7 +7,7 @@ import TableToolbar from "modules/tableToolbar";
 import DeleteModal from "./deleteModal";
 import { Get } from "requests";
 
-const ClientsPage = () => {
+const ClientsList = () => {
     
     const [modal, SetModal] = useState(false);
     const [deleteModal, SetDeleteModal] = useState(false);
@@ -126,4 +126,4 @@ const ClientsPage = () => {
     );
 }
 
-export default ClientsPage;
+export default ClientsList;

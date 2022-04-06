@@ -1,13 +1,33 @@
-import { Box, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { Box, ClickAwayListener, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { useState } from "react";
-import MenuIcon from '@mui/icons-material/Menu';
-import DashboardMenu from "./menu";
-
 import { pages } from "./data";
+import { motion } from "framer-motion";
+
+import MenuIcon from '@mui/icons-material/Menu';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DashboardMenu from "./menu";
 import styles from "./index.module.css";
 
 const DRAWER_WIDTH = 12;
 const CLOSED_DRAWER_WIDTH = 3.5;
+
+const paperVariants = {
+    closed: {
+        width: `${CLOSED_DRAWER_WIDTH}em`
+    },
+    open: {
+        width: `${DRAWER_WIDTH}em`,
+    }
+}
+
+const buttonVariants = {
+    closed: {
+        x: 0
+    },
+    open: {
+        x: "5.5em"
+    }
+}
 
 const Dashboard = props => {
 
@@ -27,42 +47,54 @@ const Dashboard = props => {
 
     return (
         <Box>
-            <Drawer 
-                variant={"permanent"}
-                PaperProps={{
-                    style: {
-                        width: open ? `${DRAWER_WIDTH}em` : `${CLOSED_DRAWER_WIDTH}em`,
-                        overflow: "hidden",
-                        transition: ".2s"
-                    }
+            <ClickAwayListener
+                onClickAway={() => {
+                    SetOpen(false);
+                    HandleMenuClose();
                 }}
             >
-                <List>
-                    <div
-                        className={styles.drawerHeader}
-                        style={{
-                            width: `${CLOSED_DRAWER_WIDTH}em`
-                        }}
-                    >
-                        <IconButton
-                            onClick={() => SetOpen(!open)}
+                <Drawer 
+                    variant={"permanent"}
+                    PaperProps={{
+                        component: motion.div,
+                        variants: paperVariants,
+                        animate: open ? "open" : "closed",
+                        style: {
+                            overflow: "hidden",
+                        }
+                    }}
+                >
+                    <List>
+                        <div
+                            className={styles.drawerHeader}
+                            style={{
+                                width: `${CLOSED_DRAWER_WIDTH}em`
+                            }}
                         >
-                            <MenuIcon/>
-                        </IconButton>
-                    </div>
-                    {pages?.map((page, pageKey) => (
-                        <ListItem
-                            key={pageKey}
-                            button
-                            className={styles.listItem}
-                            onClick={e => HandleMenuOpen(e, page?.items)}
-                        >
-                            <ListItemIcon>{page?.icon}</ListItemIcon>
-                            <ListItemText primary={page?.label}/>
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
+                            <IconButton
+                                onClick={() => SetOpen(!open)}
+                                component={motion.button}
+                                variants={buttonVariants}
+                                initial={"closed"}
+                                animate={open ? "open" : "closed"}
+                            >
+                                {open ? <ArrowBackIcon/> : <MenuIcon/>}
+                            </IconButton>
+                        </div>
+                        {pages?.map((page, pageKey) => (
+                            <ListItem
+                                key={pageKey}
+                                button
+                                className={styles.listItem}
+                                onClick={e => HandleMenuOpen(e, page?.items)}
+                            >
+                                <ListItemIcon>{page?.icon}</ListItemIcon>
+                                <ListItemText primary={page?.label}/>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Drawer>
+            </ClickAwayListener>
             <DashboardMenu
                 items={activeItems}
                 anchorEl={menuAnchor}

@@ -6,7 +6,7 @@ import {
     Route
 } from "react-router-dom";
 
-import routes from "./data";
+import routes from "../pages/registers/clients/List/data";
 
 const AllRoutes = props => {
     return (

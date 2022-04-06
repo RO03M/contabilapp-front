@@ -1,11 +1,11 @@
-import ClientsPage from "pages/registers/clients";
+import ClientsList from "pages/registers/clients/List";
 import Settings from "pages/settings";
-import Landing from "../pages/landing";
+import Landing from "../../../landing";
 
 const publicRoutes = [
     { path: "/", component: <Landing/> },
     { path: "/settings", component: <Settings/> },
-    { path: "/clients", component: <ClientsPage/> }
+    { path: "/clients", component: <ClientsList/> }
 ];
 
 export default [
