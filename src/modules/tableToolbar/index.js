@@ -11,6 +11,7 @@ const TableToolbar = props => {
         onDelete = () => {}
     } = props;
 
+    if (!numSelected) return null;
     return (
         <>
             <AppBar
@@ -28,7 +29,7 @@ const TableToolbar = props => {
                         <Typography
                             variant="subtitle1"
                         >
-                            {numSelected} selecionados
+                            {numSelected} {title}(s) selecionados
                         </Typography>
                     ) : (
                         <Typography
@@ -46,7 +47,6 @@ const TableToolbar = props => {
                     )}
                 </Toolbar>
             </AppBar>
-            <Toolbar/>
         </>
     );
 }

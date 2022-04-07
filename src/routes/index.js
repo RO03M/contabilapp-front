@@ -1,20 +1,19 @@
+import { Box } from "@mui/material";
 import Dashboard from "modules/dashboard";
-import Header from "modules/header";
 import {
     BrowserRouter,
     Routes,
     Route
 } from "react-router-dom";
 
-import routes from "../pages/registers/clients/List/data";
+import routes from "./data";
 
 const AllRoutes = props => {
     return (
         <BrowserRouter>
-            {/* <Header/> */}
             <Dashboard/>
-            <div
-                style={{ marginLeft: "3.5em" }}
+            <Box
+                marginLeft={"3.5em"}
             >
                 <Routes>
                     {routes?.map((value, key) => (
@@ -26,7 +25,7 @@ const AllRoutes = props => {
                         />
                     ))}
                 </Routes>
-            </div>
+            </Box>
         </BrowserRouter>
     );
 }

@@ -60,7 +60,7 @@ const LIGHT_PALETTE = {
         ]
     },
     palette: {
-        mode: "dark",
+        mode: "light",
         // primary: {
         //     light: '#B0A394',
         //     main: '#a29688',

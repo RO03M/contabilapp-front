@@ -1,24 +1,24 @@
 export const DynamicRoute = props => {
 
     const {
-        public = false,
+        isPublic = false,
         acceptAuthed = true,
         ...other
     } = props;
 
     let token = localStorage.getItem("token");
 
-    if (public && !acceptAuthed) return (
+    if (isPublic && !acceptAuthed) return (
         <Route
             {...other}
         />
     );
-    else if (public) return (
+    else if (isPublic) return (
         <Route
             {...other}
         />
     );
-    else if (!public) return (
+    else if (!isPublic) return (
         <Route
             {...other}
         />

@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, MenuList, Select, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 
-import { UFList } from "./data";
+import { UFList } from "utils/variables";
 
 const GlobalData = () => {
 
