@@ -1,12 +1,15 @@
 import { Box } from "@mui/material";
-import AddButton from "./AddButton";
+import FabModal from "modules/FabModal";
+import Formbody from "./Formbody";
 import ClientsTable from "./Table";
 
 const Clients = () => {
     return (
         <Box>
             <ClientsTable/>
-            <AddButton/>
+            <FabModal>
+                <Formbody/>
+            </FabModal>
         </Box>
     );
 }
