@@ -6,7 +6,7 @@ import TableToolbar from "modules/tableToolbar";
 
 const ClientsTable = () => {
 
-    const [clients, SetClients] = useState(new Array(100).fill({ name: "dummie" }));
+    const [clients, SetClients] = useState(new Array(5).fill({ name: "dummie" }));
     const [toDelete, SetToDelete] = useState([])
 
     const HandleSelect = useCallback(id => SetToDelete([...toDelete, id]), [toDelete]);

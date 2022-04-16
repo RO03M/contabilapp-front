@@ -1,0 +1,12 @@
+.boxesContainer::-webkit-scrollbar {
+    width: 5px;
+}
+
+.boxesContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.boxesContainer::-webkit-scrollbar-thumb {
+    background: rgb(75, 75, 75);
+    border-radius: 6px;
+}
