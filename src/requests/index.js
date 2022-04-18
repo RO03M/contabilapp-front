@@ -1,11 +1,9 @@
-import { API_URL } from "variables";
-
 export const Get = async (path) => {
     const headers = {
         "Accept": "application/json"
     }
 
-    let response = await fetch(API_URL + path, {
+    let response = await fetch(path, {
         method: "GET",
         headers: headers
     })
@@ -21,7 +19,7 @@ export const Post = async (path, body) => {
         "Content-type": "application/json"
     }
 
-    let response = await fetch(API_URL + path, {
+    let response = await fetch(path, {
         method: "POST",
         headers: headers,
         body: body
@@ -38,7 +36,7 @@ export const Put = async (path, body) => {
         "Content-type": "application/json"
     }
 
-    let response = await fetch(API_URL + path, {
+    let response = await fetch(path, {
         method: "PUT",
         headers: headers,
         body: body
@@ -55,7 +53,7 @@ export const Patch = async (path, body) => {
         "Content-type": "application/json"
     }
     console.log(body)
-    let response = await fetch(API_URL + path, {
+    let response = await fetch(path, {
         method: "PATCH",
         headers: headers,
         body: body
@@ -72,7 +70,7 @@ export const Delete = async (path, body) => {
         "Content-type": "application/json"
     }
 
-    let response = await fetch(API_URL + path, {
+    let response = await fetch(path, {
         method: "DELETE",
         headers: headers,
         body: body

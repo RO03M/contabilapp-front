@@ -6,13 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from "./reducers";
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
-	<Provider store={createStore(reducers)}>
-		<React.StrictMode>
-			<App />
-		</React.StrictMode>
-	</Provider>,
+	<QueryClientProvider client={queryClient}>
+		<Provider store={createStore(reducers)}>
+			<React.StrictMode>
+				<App />
+			</React.StrictMode>
+		</Provider>
+	</QueryClientProvider>,
 	document.getElementById('root')
 );
 
