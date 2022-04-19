@@ -3,15 +3,20 @@ import { useCallback, useState } from "react";
 import Head from "./Head";
 import Board from "./Board";
 import TableToolbar from "modules/tableToolbar";
+import { useQuery } from "react-query";
+import { Get } from "requests";
+import { API_URL } from "variables";
 
 const ClientsTable = () => {
 
-    const [clients, SetClients] = useState(new Array(5).fill({ name: "dummie" }));
-    const [toDelete, SetToDelete] = useState([])
+    const [clients, SetClients] = useState([]);
+    const [toDelete, SetToDelete] = useState([]);
 
     const HandleSelect = useCallback(id => SetToDelete([...toDelete, id]), [toDelete]);
-
     const HandleUnselect = useCallback(id => SetToDelete([...toDelete.filter(x => x !== id)]), [toDelete]);
+
+    const { isLoading, data } = useQuery(["clients"], async () => await Get(`${API_URL}/clients`));
+    console.log(data);
 
     return (
         <Box>

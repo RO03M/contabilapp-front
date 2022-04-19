@@ -7,7 +7,9 @@ const Clients = () => {
     return (
         <Box>
             <ClientsTable/>
-            <FabModal>
+            <FabModal
+                // height="100%"
+            >
                 <Formbody/>
             </FabModal>
         </Box>

@@ -4,13 +4,17 @@ import { motion, useCycle } from "framer-motion";
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { backgroundVariants, closeButtonVariants } from "./variants";
+import { backgroundVariants, buttonVariants } from "./variants";
 import { CLOSED_DRAWER_WIDTH } from "modules/dashboard/data";
+import { createContext } from "react";
+
+export const FabModalContext = createContext();
 
 const FabModal = props => {
 
     const {
-        children
+        children,
+        ...others
     } = props;
 
     const [modal, ToggleModal] = useCycle(false, true);
@@ -22,9 +26,14 @@ const FabModal = props => {
                 bottom={20}
                 right={20}
                 zIndex={2}
+                {...others}
             >
                 <Fab
                     size="medium"
+                    component={motion.button}
+                    variants={buttonVariants}
+                    initial={"closed"}
+                    animate={!modal ? "open" : "closed"}
                     onClick={ToggleModal}
                 >
                     <AddIcon/>
@@ -44,12 +53,18 @@ const FabModal = props => {
                     <Box
                         marginLeft={`${CLOSED_DRAWER_WIDTH}em`}
                     >
-                        {children}
+                        <FabModalContext.Provider
+                            value={{
+                                open: modal
+                            }}
+                        >
+                            {children}
+                        </FabModalContext.Provider>
                     </Box>
                     <Fab
                         size={"medium"}
                         component={motion.button}
-                        variants={closeButtonVariants}
+                        variants={buttonVariants}
                         onClick={ToggleModal}
                         sx={{
                             position: "absolute",

@@ -13,7 +13,7 @@ export const backgroundVariants = {
     }
 }
 
-export const closeButtonVariants = {
+export const buttonVariants = {
     closed: {
         opacity: 0,
         scale: 0,
@@ -30,13 +30,7 @@ export const closeButtonVariants = {
         opacity: 1,
         scale: 1,
         transition: {
-            delay: 0.1,
-            opacity: {
-                duration: 0.3
-            },
-            scale: {
-                duration: 0.2
-            }
+            delay: 0.2
         }
     }
 }

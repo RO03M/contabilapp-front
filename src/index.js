@@ -13,9 +13,7 @@ const queryClient = new QueryClient();
 ReactDOM.render(
 	<QueryClientProvider client={queryClient}>
 		<Provider store={createStore(reducers)}>
-			<React.StrictMode>
-				<App />
-			</React.StrictMode>
+			<App/>
 		</Provider>
 	</QueryClientProvider>,
 	document.getElementById('root')

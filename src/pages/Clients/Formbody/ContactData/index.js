@@ -16,7 +16,7 @@ const ContactData = props => {
         register
     } = props;
 
-    const [cep, SetCep] = useState(getValues("cep") || "");
+    const [cep, SetCep] = useState("");
 
     const { data, isLoading } = useQuery(["cep", cep], async () => {
         const tempCep = cep.toString().replace(/[^0-9]/g, "");
@@ -26,7 +26,7 @@ const ContactData = props => {
         onSuccess: (data) => {
             if (!data) return;
             const { localidade: location, uf, bairro: district, logradouro: publicPlace } = data;
-            setValue("city", location);
+            setValue("city", location, { shouldTouch: true });
             setValue("district", district);
             setValue("publicPlace", publicPlace);
             setValue("uf", uf);
@@ -40,13 +40,14 @@ const ContactData = props => {
             <Controller
                 control={control}
                 name="phone"
+                defaultValue={""}
                 render={({field: { onChange, value }}) => <InputMask
-                    // {...register("phone")}
                     mask="(99) 99999-9999"
                     value={value}
                     onChange={onChange}
                 >
                     {() => <TextField
+                        InputLabelProps={{ shrink: true }}
                         label={"Celular"}
                         placeholder={"Celular"}
                         fullWidth
@@ -58,10 +59,14 @@ const ContactData = props => {
             <Controller
                 control={control}
                 name={"deskPhone"}
+                defaultValue={""}
                 render={({ field: { onChange, value } }) => <InputMask
                     mask="(99) 9999-9999"
+                    value={value}
+                    onChange={onChange}
                 >
                     {() => <TextField
+                        InputLabelProps={{ shrink: true }}
                         label={"Telefone"}
                         placeholder={"Telefone"}
                         fullWidth
@@ -72,10 +77,13 @@ const ContactData = props => {
             <Box display="flex">
                 <InputMask
                     {...register("cep")}
+                    defaultValue={""}
                     mask="99999-999"
                     onChange={e => SetCep(e.target.value)}
+                    value={cep}
                 >
                     {() => <TextField
+                        InputLabelProps={{ shrink: true }}
                         label={"CEP"}
                         placeholder={"CEP"}
                         fullWidth
@@ -84,6 +92,7 @@ const ContactData = props => {
                 </InputMask>
                 <TextField
                     {...register("publicPlace")}
+                    defaultValue={""}
                     InputLabelProps={{ shrink: true }}
                     label={"Logradouro"}
                     placeholder={"Logradouro"}
@@ -94,6 +103,8 @@ const ContactData = props => {
             <Box display="flex">
                 <TextField
                     {...register("number")}
+                    InputLabelProps={{ shrink: true }}
+                    defaultValue={""}
                     label={"Número"}
                     placeholder={"Número"}
                     fullWidth
@@ -101,6 +112,7 @@ const ContactData = props => {
                 />
                 <TextField
                     {...register("district")}
+                    defaultValue={""}
                     InputLabelProps={{ shrink: true }}
                     label={"Bairro"}
                     placeholder={"Bairro"}
@@ -111,6 +123,7 @@ const ContactData = props => {
             <Box display="flex">
                 <TextField
                     {...register("city")}
+                    defaultValue={""}
                     InputLabelProps={{ shrink: true }}
                     label={"Cidade"}
                     placeholder={"Cidade"}
@@ -119,6 +132,8 @@ const ContactData = props => {
                 />
                 <TextField
                     {...register("uf")}
+                    InputLabelProps={{ shrink: true }}
+                    defaultValue={""}
                     label={"UF"}
                     placeholder={"UF"}
                     fullWidth
@@ -126,7 +141,7 @@ const ContactData = props => {
                     select
                 >
                     <MenuItem
-                        value={undefined}
+                        value={""}
                     >
                         <i>Nenhum</i>
                     </MenuItem>

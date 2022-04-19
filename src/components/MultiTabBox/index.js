@@ -52,7 +52,7 @@ const MultiTabBox = props => {
                 className={styles.boxesContainer}
                 sx={{
                     flex: 4,
-                    height: "20em",
+                    height: "100%",
                     overflowY: "scroll"
                 }}
             >
