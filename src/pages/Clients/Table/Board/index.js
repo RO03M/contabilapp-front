@@ -25,7 +25,7 @@ const Board = props => {
     }
 
     return (
-        <TableRow>
+        <TableRow id={id}>
             <TableCell>
                 <Checkbox
                     checked={checked}

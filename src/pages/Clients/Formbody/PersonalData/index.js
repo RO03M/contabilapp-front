@@ -33,6 +33,7 @@ const PersonalData = props => {
                 />
             </Box>
             <TextField
+                {...register("email")}
                 label={"E-mail"}
                 placeholder={"E-mail"}
                 margin="dense"

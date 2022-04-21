@@ -10,14 +10,30 @@ import PersonalData from "./PersonalData";
 import ContactData from "./ContactData";
 import OtherData from "./OtherData";
 import { submitButton } from "./variants";
+import { useMutation } from "react-query";
+import { Post } from "requests";
+import { API_URL } from "variables";
 
 const Formbody = props => {
 
     const { register, handleSubmit, setValue, getValues, control } = useForm();
     const fabModal = useContext(FabModalContext);
 
+    const submitMutation = useMutation(async data => {
+        data = JSON.stringify(data);
+        return await Post(`${API_URL}/clients`, data);
+    }, {
+        onSuccess: (data) => {
+            console.log("success! " + data);
+        },
+        onError: (data) => {
+            console.log("error! :c " + data);
+        }
+    });
+
     const Submit = e => {
         console.log(e);
+        submitMutation.mutate(e);
     }
 
     return (

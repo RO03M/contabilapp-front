@@ -6,17 +6,25 @@ import TableToolbar from "modules/tableToolbar";
 import { useQuery } from "react-query";
 import { Get } from "requests";
 import { API_URL } from "variables";
+import Paginate from "components/Paginate";
 
 const ClientsTable = () => {
 
-    const [clients, SetClients] = useState([]);
     const [toDelete, SetToDelete] = useState([]);
+    const [page, SetPage] = useState(1);
 
     const HandleSelect = useCallback(id => SetToDelete([...toDelete, id]), [toDelete]);
     const HandleUnselect = useCallback(id => SetToDelete([...toDelete.filter(x => x !== id)]), [toDelete]);
 
-    const { isLoading, data } = useQuery(["clients"], async () => await Get(`${API_URL}/clients`));
-    console.log(data);
+    const { isLoading, data } = useQuery(["clients", page], async () => await Get(`${API_URL}/clients?page=${page}`));
+    const {
+        clients: {
+            docs: clients = [],
+            pages: maxPage = 1
+        } = {}
+    } = data || {};
+
+    console.log(maxPage);
 
     return (
         <Box>
@@ -32,7 +40,7 @@ const ClientsTable = () => {
                     <TableBody>
                         {clients?.map((clients, clientsKey) => (
                             <Board
-                                key={clientsKey}
+                                key={clients?.id}
                                 onSelect={HandleSelect}
                                 onUnselect={HandleUnselect}
                                 {...clients}
@@ -41,6 +49,11 @@ const ClientsTable = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Paginate
+                page={page}
+                onChange={SetPage}
+                count={maxPage}
+            />
         </Box>
     );
 }

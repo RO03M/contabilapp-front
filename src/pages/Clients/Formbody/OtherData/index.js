@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, FormControlLabel, Checkbox } from "@mui/material";
 
 const OtherData = props => {
 
@@ -9,6 +9,7 @@ const OtherData = props => {
     return (
         <Box>
             <TextField
+                {...register("stateSub")}
                 sx={{
                     width: "50%"
                 }}
@@ -17,6 +18,7 @@ const OtherData = props => {
                 placeholder={"Inscrição estadual"}
             />
             <TextField
+                {...register("citySub")}
                 sx={{
                     width: "50%"
                 }}
@@ -25,6 +27,7 @@ const OtherData = props => {
                 placeholder={"Inscrição municipal"}
             />
             <TextField
+                {...register("coml")}
                 sx={{
                     width: "50%"
                 }}
@@ -41,6 +44,7 @@ const OtherData = props => {
                 placeholder={"Capital social"}
             />
             <TextField
+                {...register("cnae")}
                 sx={{
                     width: "50%"
                 }}
@@ -49,6 +53,7 @@ const OtherData = props => {
                 placeholder={"CNAE"}
             />
             <TextField
+                {...register("iva")}
                 sx={{
                     width: "50%"
                 }}
@@ -57,6 +62,7 @@ const OtherData = props => {
                 placeholder={"IVA"}
             />
             <TextField
+                {...register("snCode")}
                 sx={{
                     width: "50%"
                 }}
@@ -65,6 +71,7 @@ const OtherData = props => {
                 placeholder={"Código de acesso SN"}
             />
             <TextField
+                {...register("usernameSupervisor")}
                 sx={{
                     width: "50%"
                 }}
@@ -73,6 +80,7 @@ const OtherData = props => {
                 placeholder={"Username posto fiscal"}
             />
             <TextField
+                {...register("passwordSupervisor")}
                 sx={{
                     width: "50%"
                 }}
@@ -81,14 +89,7 @@ const OtherData = props => {
                 placeholder={"Senha posto fiscal"}
             />
             <TextField
-                sx={{
-                    width: "50%"
-                }}
-                margin="dense"
-                label={"Sindicato"}
-                placeholder={"Sindicato"}
-            />
-            <TextField
+                {...register("fees")}
                 sx={{
                     width: "50%"
                 }}
@@ -96,29 +97,13 @@ const OtherData = props => {
                 label={"Valor Honorários"}
                 placeholder={"Valor Honorários"}
             />
-            <TextField
-                sx={{
-                    width: "50%"
-                }}
-                margin="dense"
-                label={"Empresa Ativa/Inativa"}
-                placeholder={"Empresa Ativa/Inativa"}
-            />
-            <TextField
-                sx={{
-                    width: "50%"
-                }}
-                margin="dense"
-                label={"Cód.Contribuinte Municipal"}
-                placeholder={"Cód.Contribuinte Municipal"}
-            />
-            <TextField
-                sx={{
-                    width: "50%"
-                }}
-                margin="dense"
-                label={"Senha Acesso Municipal"}
-                placeholder={"Senha Acesso Municipal"}
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        {...register("enabledCompany")}
+                    />
+                }
+                label={"Empresa ativa"}
             />
         </Box>
     );
