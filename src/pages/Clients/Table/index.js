@@ -40,7 +40,7 @@ const ClientsTable = () => {
                     <TableBody>
                         {clients?.map((clients, clientsKey) => (
                             <Board
-                                key={clients?.id}
+                                key={clientsKey}
                                 onSelect={HandleSelect}
                                 onUnselect={HandleUnselect}
                                 {...clients}
