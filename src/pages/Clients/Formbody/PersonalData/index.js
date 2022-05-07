@@ -5,7 +5,8 @@ import { Text2CpfCnpj } from "utils/masks";
 const PersonalData = props => {
 
     const {
-        register
+        register,
+        errors
     } = props;
 
     const [document, SetDocument] = useState("");
@@ -16,14 +17,22 @@ const PersonalData = props => {
                 display="flex"
             >
                 <TextField
-                    {...register("name")}
+                    {...register("name", {
+                        required: "Insira um nome"
+                    })}
+                    helperText={errors?.name?.message}
+                    error={Boolean(errors?.name)}
                     label="Nome"
                     placeholder="Nome"
                     margin="dense"
                     fullWidth
                 />
                 <TextField
-                    {...register("document")}
+                    {...register("document", {
+                        required: "O CPF/CNPJ é necessário"
+                    })}
+                    helperText={errors?.document?.message}
+                    error={Boolean(errors?.document)}
                     fullWidth
                     label="CPF/CNPJ"
                     placeholder="CPF/CNPJ"
@@ -33,7 +42,11 @@ const PersonalData = props => {
                 />
             </Box>
             <TextField
-                {...register("email")}
+                {...register("email", {
+                    required: "O e-mail é necessário"
+                })}
+                helperText={errors?.email?.message}
+                error={Boolean(errors?.email)}
                 label={"E-mail"}
                 placeholder={"E-mail"}
                 margin="dense"

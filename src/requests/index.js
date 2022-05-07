@@ -14,9 +14,10 @@ export const Get = async (path) => {
 }
 
 export const Post = async (path, body) => {
+    
     const headers = {
         "Accept": "application/json",
-        "Content-type": "application/json"
+        ...(!(body instanceof FormData) && {"Content-type": "application/json"})
     }
 
     let response = await fetch(path, {
@@ -33,7 +34,7 @@ export const Post = async (path, body) => {
 export const Put = async (path, body) => {
     const headers = {
         "Accept": "application/json",
-        "Content-type": "application/json"
+        ...(!(body instanceof FormData) && {"Content-type": "application/json"})
     }
 
     let response = await fetch(path, {
@@ -50,9 +51,9 @@ export const Put = async (path, body) => {
 export const Patch = async (path, body) => {
     const headers = {
         "Accept": "application/json",
-        "Content-type": "application/json"
+        ...(!(body instanceof FormData) && {"Content-type": "application/json"})
     }
-    console.log(body)
+    
     let response = await fetch(path, {
         method: "PATCH",
         headers: headers,

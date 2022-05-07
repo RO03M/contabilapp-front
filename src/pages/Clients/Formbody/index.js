@@ -16,7 +16,7 @@ import { API_URL } from "variables";
 
 const Formbody = props => {
 
-    const { register, handleSubmit, setValue, getValues, control } = useForm();
+    const { register, handleSubmit, setValue, getValues, control, formState: { errors } } = useForm();
     const fabModal = useContext(FabModalContext);
 
     const submitMutation = useMutation(async data => {
@@ -45,11 +45,13 @@ const Formbody = props => {
             // height="100%"
         >
             <MultiTabBox
-                width="80%"
+                width="100%"
+                padding={3}
             >
                 <PersonalData
                     label="Dados pessoais"
                     register={register}
+                    errors={errors}
                 />
                 <ContactData
                     label="Dados de contato"

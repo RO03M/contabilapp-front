@@ -1,11 +1,12 @@
-import { Box, Table, TableBody, TableContainer } from "@mui/material";
+import { Box, Table, TableBody, TableContainer, Typography } from "@mui/material";
 import { useCallback, useState } from "react";
+import { useQuery, useMutation } from "react-query";
+import { Post, Get } from "requests";
+import { API_URL } from "variables";
+
 import Head from "./Head";
 import Board from "./Board";
 import TableToolbar from "modules/tableToolbar";
-import { useQuery } from "react-query";
-import { Get } from "requests";
-import { API_URL } from "variables";
 import Paginate from "components/Paginate";
 
 const ClientsTable = () => {
@@ -18,19 +19,29 @@ const ClientsTable = () => {
 
     const { isLoading, data } = useQuery(["clients", page], async () => await Get(`${API_URL}/clients?page=${page}`));
     const {
-        clients: {
-            docs: clients = [],
-            pages: maxPage = 1
+        clients = [],
+        pagination: {
+            lastPage: maxPage = 1
         } = {}
     } = data || {};
 
-    console.log(maxPage);
+    const { mutate: deleteMutation } = useMutation(async () => {
+        const form = new FormData();
+        for (let i = 0; i < toDelete.length; i++) form.append("ids[]", toDelete[i]);
+
+        return await Post(`${API_URL}/clients/delete`, form);
+    }, {
+        onSuccess: () => {
+            SetToDelete([]);
+        }
+    });
 
     return (
         <Box>
             <TableToolbar
                 title={"Clientes"}
                 numSelected={toDelete?.length}
+                onDelete={deleteMutation}
             />
             <TableContainer sx={{ overflowX: "initial" }}>
                 <Table
@@ -49,6 +60,14 @@ const ClientsTable = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            {clients?.length == 0 && (
+                <Typography
+                    align="center"
+                    mt={5}
+                >
+                    Nenhum cliente encontrado
+                </Typography>
+            )}
             <Paginate
                 page={page}
                 onChange={SetPage}
