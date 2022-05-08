@@ -52,7 +52,13 @@ const GrowCircleContainer = props => {
                     {...others}
                 >
                     <AnimatePresence>
-                        {open && children}
+                        {open && (
+                            <motion.div
+                                exit={{ opacity: 0 }}
+                            >
+                                {children}
+                            </motion.div>
+                        )}
                     </AnimatePresence>
                     <AnimatePresence>
                         {open && closeButton && (

@@ -54,7 +54,7 @@ const ClientsTable = () => {
                                 key={clientsKey}
                                 onSelect={HandleSelect}
                                 onUnselect={HandleUnselect}
-                                {...clients}
+                                data={{...clients}}
                             />
                         ))}
                     </TableBody>

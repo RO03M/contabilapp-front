@@ -1,16 +1,19 @@
-import { useRef, useState } from "react";
-import { IconButton } from "@mui/material";
+import { useState } from "react";
+import { Fab, IconButton } from "@mui/material";
+import { CLOSED_DRAWER_WIDTH } from "variables";
+import { motion } from "framer-motion";
+import { closeOpenScaleVariant } from "defaultVariants";
 
+import CheckIcon from '@mui/icons-material/Check';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import GrowCircleContainer from "components/GrowCircleContainer";
 import Formbody from "pages/Clients/Formbody";
-import { CLOSED_DRAWER_WIDTH } from "variables";
 
 const Actions = props => {
 
     const {
-        id
+        data = {}
     } = props;
 
     const [open, SetOpen] = useState(false);
@@ -41,10 +44,28 @@ const Actions = props => {
             <GrowCircleContainer
                 open={open}
                 anchorEl={anchorEl}
-                marginLeft={`${CLOSED_DRAWER_WIDTH}em`}
+                paddingLeft={`${CLOSED_DRAWER_WIDTH}em`}
                 onClose={CloseEdit}
             >
-                <Formbody/>
+                <Formbody
+                    defaultValues={data}
+                />
+                <Fab
+                    size="medium"
+                    component={motion.button}
+                    variants={closeOpenScaleVariant}
+                    initial={"closed"}
+                    animate={open ? "open" : "closed"}
+                    onClick={CloseEdit}
+                    style={{
+                        position: "absolute",
+                        bottom: 20,
+                        right: 20,
+                        zIndex: 10000
+                    }}
+                >
+                    <CheckIcon/>
+                </Fab>
             </GrowCircleContainer>
         </>
     );

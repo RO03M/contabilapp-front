@@ -5,12 +5,13 @@ import Actions from "./Actions";
 const Board = props => {
 
     const {
-        id,
-        name,
-        email,
-        document,
-        city,
-        phone,
+        // id,
+        // name,
+        // email,
+        // document,
+        // city,
+        // phone,
+        data = {},
         onSelect = () => {},
         onUnselect = () => {},
         ...others
@@ -20,26 +21,26 @@ const Board = props => {
 
     const HandleCheckbox = e => {
         SetChecked(e.target.checked);
-        if (e.target.checked) onSelect(id);
-        else onUnselect(id);
+        if (e.target.checked) onSelect(data?.id);
+        else onUnselect(data?.id);
     }
 
     return (
-        <TableRow id={id}>
+        <TableRow id={data?.id}>
             <TableCell>
                 <Checkbox
                     checked={checked}
                     onChange={HandleCheckbox}
                 />
             </TableCell>
-            <TableCell>{name}</TableCell>
-            <TableCell>{email}</TableCell>
-            <TableCell>{document}</TableCell>
-            <TableCell>{city}</TableCell>
-            <TableCell>{phone}</TableCell>
+            <TableCell>{data?.name}</TableCell>
+            <TableCell>{data?.email}</TableCell>
+            <TableCell>{data?.document}</TableCell>
+            <TableCell>{data?.city}</TableCell>
+            <TableCell>{data?.phone}</TableCell>
             <TableCell>
                 <Actions
-                    id={id}
+                    data={data}
                 />
             </TableCell>
         </TableRow>

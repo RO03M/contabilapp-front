@@ -12,24 +12,18 @@ import OtherData from "./OtherData";
 import { submitButton } from "./variants";
 import { useMutation } from "react-query";
 import { Post } from "requests";
-import { API_URL } from "variables";
+import { API_URL, CLOSED_DRAWER_WIDTH } from "variables";
 
 const Formbody = props => {
 
-    const { register, handleSubmit, setValue, getValues, control, formState: { errors } } = useForm();
+    const {
+        defaultValues = {}
+    } = props;
+
+    const { register, handleSubmit, setValue, getValues, control, formState: { errors } } = useForm({ defaultValues });
     const fabModal = useContext(FabModalContext);
 
-    const submitMutation = useMutation(async data => {
-        data = JSON.stringify(data);
-        return await Post(`${API_URL}/clients`, data);
-    }, {
-        onSuccess: (data) => {
-            console.log("success! " + data);
-        },
-        onError: (data) => {
-            console.log("error! :c " + data);
-        }
-    });
+    
 
     const Submit = e => {
         console.log(e);
@@ -45,7 +39,7 @@ const Formbody = props => {
             // height="100%"
         >
             <MultiTabBox
-                width="100%"
+                width={`calc(100% - ${CLOSED_DRAWER_WIDTH}em)`}
                 padding={3}
             >
                 <PersonalData
